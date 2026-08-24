@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARENA_CORE // Global Football Platform & Multi-Tournament Simulator</title>
+  <meta name="description"
+    content="Professional football platform with API-Football real data, official standings, match center, highlights hub, and 10-competition Poisson tournament simulator.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Top Broadcast Header -->
+  <header class="site-header">
+    <div class="header-left">
+      <div class="brand-logo">
+        <span class="logo-title">ARENA_CORE<span class="logo-ver">_V2.0</span></span>
+      </div>
+      <div class="brand-tagline">GLOBAL FOOTBALL DATA & SIMULATION NEXUS</div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <nav class="top-nav" aria-label="Main Navigation">
+      <button type="button" class="top-nav-link active" data-nav="tournament-home">
+        <i class="fa-solid fa-house"></i> HOME
+      </button>
+      <button type="button" class="top-nav-link" data-nav="tournament-sim">
+        <i class="fa-solid fa-bolt"></i> SIMULATOR
+      </button>
+      <button type="button" class="top-nav-link" data-nav="standings-view">
+        <i class="fa-solid fa-chart-simple"></i> LEAGUE STANDINGS
+      </button>
+    </nav>
+
+    <div class="header-right">
+      <span class="data-mode-badge" id="global-data-mode">
+        <span class="mode-pulse"></span>
+        <span class="mode-text">REAL DATA + SIM ENGINE</span>
+      </span>
+    </div>
+  </header>
+
+  <!-- 10-Competition Selection Bar -->
+  <nav class="competition-selector-bar" role="tablist" aria-label="Select Competition">
+    <div class="comp-bar-inner" id="comp-bar-inner">
+      <button type="button" class="comp-tab active" data-tourn="wc" role="tab" aria-selected="true">
+        🌍 FIFA WORLD CUP
+      </button>
+      <button type="button" class="comp-tab" data-tourn="ucl" role="tab" aria-selected="false">
+        ⭐ UEFA CHAMPIONS LEAGUE
+      </button>
+      <button type="button" class="comp-tab" data-tourn="pl" role="tab" aria-selected="false">
+        ⚔️ PREMIER LEAGUE
+      </button>
+      <button type="button" class="comp-tab" data-tourn="laliga" role="tab" aria-selected="false">
+        🇪🇸 LA LIGA
+      </button>
+      <button type="button" class="comp-tab" data-tourn="serieA" role="tab" aria-selected="false">
+        🇮🇹 SERIE A
+      </button>
+      <button type="button" class="comp-tab" data-tourn="bundesliga" role="tab" aria-selected="false">
+        🇩🇪 BUNDESLIGA
+      </button>
+      <button type="button" class="comp-tab" data-tourn="ligue1" role="tab" aria-selected="false">
+        🇫🇷 LIGUE 1
+      </button>
+      <button type="button" class="comp-tab" data-tourn="ligaPortugal" role="tab" aria-selected="false">
+        🇵🇹 LIGA PORTUGAL
+      </button>
+      <button type="button" class="comp-tab" data-tourn="eredivisie" role="tab" aria-selected="false">
+        🇳🇱 EREDIVISIE
+      </button>
+      <button type="button" class="comp-tab" data-tourn="superLig" role="tab" aria-selected="false">
+        🇹🇷 SÜPER LİG
+      </button>
+      <button type="button" class="comp-tab" data-tourn="scottishPrem" role="tab" aria-selected="false">
+        🏴󠁧󠁢󠁳󠁣󠁴󠁿 SCOTTISH PREM
+      </button>
+      <button type="button" class="comp-tab" data-tourn="euro" role="tab" aria-selected="false">
+        🇪🇺 UEFA EURO 2024
+      </button>
+      <button type="button" class="comp-tab" data-tourn="copa" role="tab" aria-selected="false">
+        🏆 COPA AMÉRICA
+      </button>
+    </div>
+  </nav>
+
+  <!-- App Main Content Container -->
+  <div class="app-layout">
+
+
+    <!-- Main Viewport -->
+    <main class="main-viewport" id="mainContent">
+
+      <!-- ============================================================
+           VIEW 1: HYPOTHETICAL TOURNAMENT SIMULATOR (WORLD B)
+           ============================================================ -->
+      <section id="view-tournament-sim" class="view-panel" hidden aria-label="Tournament Simulator">
+
+        <!-- World Cup Simulator Topbar with Return Button -->
+        <div id="wc-sim-back-bar" class="wc-sim-topbar" hidden>
+          <button type="button" class="wc-back-btn" id="btn-back-to-wc-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>BACK TO WORLD CUP HOME</span>
+          </button>
+          <div class="wc-sim-topbar-title">
+            <i class="fa-solid fa-trophy"></i>
+            <span>FIFA WORLD CUP 2026 // TOURNAMENT SIMULATOR</span>
+          </div>
+        </div>
+
+        <!-- UEFA Champions League Simulator Topbar with Return Button -->
+        <div id="ucl-sim-back-bar" class="ucl-sim-topbar" hidden>
+          <button type="button" class="ucl-back-btn" id="btn-back-to-ucl-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>BACK TO UCL HOME</span>
+          </button>
+          <div class="ucl-sim-topbar-title">
+            <i class="fa-solid fa-star"></i>
+            <span>UEFA CHAMPIONS LEAGUE // SIMULATION HUB</span>
+          </div>
+        </div>
+
+        <!-- Premier League Simulator Topbar with Return Button -->
+        <div id="pl-sim-back-bar" class="pl-sim-topbar" hidden>
+          <button type="button" class="pl-back-btn" id="btn-back-to-pl-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>BACK TO PL HOME</span>
+          </button>
+          <div class="pl-sim-topbar-title">
+            <i class="fa-solid fa-shield"></i>
+            <span>PREMIER LEAGUE // SIMULATION HUB</span>
+          </div>
+        </div>
+
+        <!-- Serie A Simulator Topbar with Return Button -->
+        <div id="seriea-sim-back-bar" class="seriea-sim-topbar" hidden>
+          <button type="button" class="seriea-back-btn" id="btn-back-to-seriea-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>BACK TO SERIE A HOME</span>
+          </button>
+          <div class="seriea-sim-topbar-title">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>SERIE A ENILIVE // SIMULATION HUB</span>
+          </div>
+        </div>
+
+        <!-- Bundesliga Simulator Topbar with Return Button -->
+        <div id="bundesliga-sim-back-bar" class="bundesliga-sim-topbar" hidden>
+          <button type="button" class="bundesliga-back-btn" id="btn-back-to-bundesliga-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>BACK TO BUNDESLIGA HOME</span>
+          </button>
+          <div class="bundesliga-sim-topbar-title">
+            <i class="fa-solid fa-trophy"></i>
+            <span>BUNDESLIGA // SIMULATION HUB</span>
+          </div>
+        </div>
+
+        <!-- Ligue 1 Simulator Topbar with Return Button -->
+        <div id="ligue1-sim-back-bar" class="ligue1-sim-topbar" hidden>
+          <button type="button" class="ligue1-back-btn" id="btn-back-to-ligue1-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>BACK TO LIGUE 1 HOME</span>
+          </button>
+          <div class="ligue1-sim-topbar-title">
+            <i class="fa-solid fa-futbol"></i>
+            <span>LIGUE 1 MCDONALD’S // SIMULATION HUB</span>
+          </div>
+        </div>
+
+        <!-- Liga Portugal Simulator Topbar with Return Button -->
+        <div id="ligaportugal-sim-back-bar" class="ligaportugal-sim-topbar" hidden>
+          <button type="button" class="ligaportugal-back-btn" id="btn-back-to-ligaportugal-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>BACK TO LIGA PORTUGAL HOME</span>
+          </button>
+          <div class="ligaportugal-sim-topbar-title">
+            <i class="fa-solid fa-shield"></i>
+            <span>LIGA PORTUGAL BETCLIC // SIMULATION HUB</span>
+          </div>
+        </div>
+
+        <!-- Eredivisie Simulator Topbar with Return Button -->
+        <div id="eredivisie-sim-back-bar" class="eredivisie-sim-topbar" hidden>
+          <button type="button" class="eredivisie-back-btn" id="btn-back-to-eredivisie-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>BACK TO EREDIVISIE HOME</span>
+          </button>
+          <div class="eredivisie-sim-topbar-title">
+            <i class="fa-solid fa-circle-dot"></i>
+            <span>EREDIVISIE // SIMULATION HUB</span>
+          </div>
+        </div>
+
+        <!-- Trendyol Süper Lig Simulator Topbar with Return Button -->
+        <div id="superlig-sim-back-bar" class="superlig-sim-topbar" hidden>
+          <button type="button" class="superlig-back-btn" id="btn-back-to-superlig-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>BACK TO SÜPER LİG HOME</span>
+          </button>
+          <div class="superlig-sim-topbar-title">
+            <i class="fa-solid fa-fire"></i>
+            <span>TRENDYOL SÜPER LİG // SIMULATION HUB</span>
+          </div>
+        </div>
+
+        <!-- Scottish Premiership Simulator Topbar with Return Button -->
+        <div id="scottishprem-sim-back-bar" class="scottishprem-sim-topbar" hidden>
+          <button type="button" class="scottishprem-back-btn" id="btn-back-to-scottishprem-home">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>BACK TO SCOTTISH PREM HOME</span>
+          </button>
+          <div class="scottishprem-sim-topbar-title">
+            <i class="fa-solid fa-shield"></i>
+            <span>SCOTTISH PREMIERSHIP // SIMULATION HUB</span>
+          </div>
+        </div>
+
+        <!-- Tournament Hero Card -->
+        <div class="sim-header-card">
+          <div class="sim-header-info">
+            <div class="data-badge-line">
+              <span class="data-badge SIMULATION">WORLD B — HYPOTHETICAL SIMULATION</span>
+              <span class="data-badge REAL_DATA" id="hero-season-badge">API SEASON: 2023/2024</span>
+            </div>
+            <h2 id="active-tourn-title" class="tourn-title">FIFA WORLD CUP 2026</h2>
+            <p id="active-tourn-desc" class="tourn-desc">
+              Simulate 48 global national contenders across 12 groups (A–L), 32-team knockout bracket, and crown the
+              hypothetical world champion!
+            </p>
+          </div>
+
+          <!-- Dynamic Stage Action Controls -->
+          <div class="sim-controls-group">
+            <div class="sim-top-btns">
+              <button type="button" id="sim-draw-btn" class="sim-action-btn outline">🎲 RESET</button>
+              <button type="button" id="sim-stage-action-btn" class="sim-action-btn primary">⚡ SIMULATE</button>
+            </div>
+
+            <!-- Live Timer Control Bar (Pause, Resume, Restart, Skip) -->
+            <div class="live-control-bar" id="live-control-bar" hidden>
+              <button type="button" id="sim-pause-btn" class="sim-ctrl-btn">⏸</button>
+              <button type="button" id="sim-resume-btn" class="sim-ctrl-btn" hidden>▶</button>
+              <button type="button" id="sim-restart-btn" class="sim-ctrl-btn">🔄</button>
+              <button type="button" id="sim-skip-btn" class="sim-ctrl-btn gold">⏩ SKIP</button>
+            </div>
+
+            <button type="button" id="sim-instant-btn" class="sim-action-btn gold">🏆 FULL SIM</button>
+          </div>
+        </div>
+
+        <!-- Simulation Progress & Live Clock HUD -->
+        <div class="sim-clock-hud" id="sim-clock-hud" hidden>
+          <div class="clock-display-wrap">
+            <span class="clock-icon">⏱</span>
+            <span class="clock-stage-label" id="clock-stage-label">ROUND OF 16</span>
+            <span class="clock-timer" id="clock-minute-text">45' (FIRST HALF)</span>
+          </div>
+          <div class="clock-progress-track">
+            <div class="clock-progress-fill" id="clock-progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- Champion Celebration Banner -->
+        <div id="champion-banner" class="champion-banner" hidden>
+          <span class="trophy-icon">🏆</span>
+          <div class="champion-text">
+            <span class="champ-label">HYPOTHETICAL CHAMPION CROWNED!</span>
+            <h3 id="champion-team-name" class="champ-name">ARGENTINA</h3>
+          </div>
+        </div>
+
+        <!-- Stage Filter Navigation Tabs -->
+        <div class="tournament-stage-viewport">
+          <div class="bracket-nav-tabs">
+            <div class="bracket-tab-group" id="stage-tabs-group" role="tablist" aria-label="Tournament Stages">
+              <button type="button" class="bracket-tab active" data-stage="all" role="tab" aria-selected="true">ALL
+                STAGES</button>
+              <button type="button" class="bracket-tab" data-stage="groups" role="tab" aria-selected="false">GROUPS /
+                LEAGUE</button>
+              <button type="button" class="bracket-tab" data-stage="r32" role="tab" aria-selected="false">ROUND OF
+                32</button>
+              <button type="button" class="bracket-tab" data-stage="r16" role="tab" aria-selected="false">ROUND OF
+                16</button>
+              <button type="button" class="bracket-tab" data-stage="qf" role="tab"
+                aria-selected="false">QUARTERFINALS</button>
+              <button type="button" class="bracket-tab" data-stage="sf" role="tab"
+                aria-selected="false">SEMIFINALS</button>
+              <button type="button" class="bracket-tab" data-stage="gf" role="tab" aria-selected="false">GRAND
+                FINAL</button>
+            </div>
+            <span id="current-stage-badge" class="stage-badge">VIEW: ALL STAGES</span>
+          </div>
+
+          <!-- Groups / League Stage View Container -->
+          <div id="groups-grid-container" class="groups-grid-container">
+            <!-- Dynamically populated by app.js -->
+          </div>
+
+          <!-- Knockout Bracket Tree Container — wrapped for top scrollbar -->
+          <div class="bracket-scroll-flip-outer">
+            <div class="bracket-tree-container" id="bracket-tree-container">
+              <!-- Bracket columns injected dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Ticker Bar -->
+        <div class="ticker-bar bottom-callout">
+          <span class="ticker-badge">📢 ARENA NEWS</span>
+          <div class="ticker-scroll" id="bracket-ticker-text">
+            SELECT A COMPETITION OR PRESS SIMULATE TO ADVANCE THROUGH THE ROUNDS //
+          </div>
+        </div>
+
+        <footer class="site-footer">
+          <div class="footer-copy">©2024 ARENA_CORE // MULTI-TOURNAMENT FOOTBALL SIMULATION PLATFORM</div>
+          <div class="footer-links">
+            <a href="#" class="foot-link">PRIVACY</a>
+            <a href="#" class="foot-link">TERMS</a>
+            <a href="#" class="foot-link">DOCUMENTATION</a>
+          </div>
+        </footer>
+      </section>
+
+      <!-- ============================================================
+           VIEW 2: REAL STANDINGS & TOP SCORERS (WORLD A)
+           ============================================================ -->
+      <section id="view-standings-view" class="view-panel" aria-label="Official Standings" hidden>
+        <div class="section-banner">
+          <div class="data-badge-line">
+            <span class="data-badge SIM_DATA"><i class="fa-solid fa-bolt"></i> LIVE SIMULATION DATA</span>
+          </div>
+          <h2 id="standings-banner-title">LEAGUE STANDINGS</h2>
+          <p id="standings-banner-desc">Live standings updated from your simulation. Simulate matchdays to see standings
+            update in real time.</p>
+        </div>
+
+        <!-- Back to LaLiga Home (shown only when coming from LaLiga Explore Teams) -->
+        <div id="standings-laliga-back" style="margin-bottom:16px;" hidden>
+          <button type="button" class="laliga-back-btn" id="btn-standings-back-laliga">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>BACK TO LALIGA HOME</span>
+          </button>
+        </div>
+
+        <div class="standings-grid">
+          <!-- Standings Table Card -->
+          <div class="tech-card table-card">
+            <div class="card-header-bar">
+              <h3 class="card-title" id="standings-table-title">LIVE STANDINGS TABLE</h3>
+              <span class="data-badge SIM_DATA"><i class="fa-solid fa-bolt"></i> SIMULATION</span>
+            </div>
+            <div class="table-responsive">
+              <table class="tech-table">
+                <thead>
+                  <tr>
+                    <th scope="col">POS</th>
+                    <th scope="col">CLUB / TEAM</th>
+                    <th scope="col">MP</th>
+                    <th scope="col">W</th>
+                    <th scope="col">D</th>
+                    <th scope="col">L</th>
+                    <th scope="col">GF</th>
+                    <th scope="col">GA</th>
+                    <th scope="col">GD</th>
+                    <th scope="col">PTS</th>
+                    <th scope="col">ZONE</th>
+                  </tr>
+                </thead>
+                <tbody id="standings-table-body">
+                  <!-- Injected dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Top Goalscorers Card -->
+          <div class="tech-card leaders-card">
+            <div class="card-header-bar">
+              <h3 class="card-title" id="scorers-table-title">GOLDEN BOOT LEADERS</h3>
+              <span class="data-badge REAL_DATA">REAL SCORERS</span>
+            </div>
+            <div class="leaders-list" id="top-scorers-list">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <footer class="site-footer">
+          <div class="footer-copy">©2024 ARENA_CORE // OFFICIAL FOOTBALL DATA LAYER</div>
+        </footer>
+      </section>
+
+
+    </main>
+  </div>
+
+  <!-- Focused Match Center Modal -->
+  <div id="match-detail-modal" class="modal" hidden tabindex="-1" role="dialog" aria-modal="true"
+    aria-labelledby="modal-match-title">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-dialog">
+      <button type="button" id="modal-close" class="modal-close-btn" aria-label="Close match details">✕</button>
+
+      <div class="modal-header-bar">
+        <span class="modal-tag" id="modal-match-tag">UEFA CHAMPIONS LEAGUE</span>
+        <h3 id="modal-match-title" class="modal-match-title">Match Center</h3>
+      </div>
+
+      <div class="modal-player-box" id="modal-player-box">
+        <!-- Video facade / stream injected here -->
+      </div>
+
+      <div class="modal-body-content">
+        <div id="modal-match-info" class="modal-info-panel">
+          <!-- Summary, Score & Details -->
+        </div>
+
+        <!-- Related Highlights -->
+        <div class="related-highlights-section">
+          <h4 class="related-title">RELATED REPLAYS</h4>
+          <div id="related-grid" class="related-grid">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Majestic Grand Championship Celebration Modal -->
+  <div id="champion-modal" class="modal celebration-modal" hidden tabindex="-1" role="dialog" aria-modal="true"
+    aria-labelledby="champ-modal-name">
+    <div class="modal-backdrop" id="champ-modal-backdrop"></div>
+    <div class="modal-dialog champ-dialog">
+      <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
+      <button type="button" id="champ-modal-close" class="modal-close-btn" aria-label="Close celebration">✕</button>
+
+      <div class="champ-modal-content">
+        <div class="trophy-sparkle-wrap">
+          <div class="gold-aura"></div>
+          <span class="champ-giant-trophy">🏆</span>
+        </div>
+        <div class="champ-headline">WORLD CHAMPIONS CROWNED!</div>
+        <div class="champ-tourn-name" id="champ-modal-tourn">FIFA WORLD CUP 2026</div>
+
+        <div class="champ-team-card" id="champ-modal-team-card">
+          <div class="champ-team-flag" id="champ-modal-flag">🇦🇷</div>
+          <h2 class="champ-team-title" id="champ-modal-name">ARGENTINA</h2>
+          <div class="champ-tagline" id="champ-modal-tagline">GLORIOUS CHAMPIONS OF THE WORLD</div>
+        </div>
+
+        <div class="champ-stats-row" id="champ-stats-row">
+          <!-- Injected dynamically -->
+        </div>
+
+        <div class="champ-modal-actions">
+          <button type="button" class="champ-btn-primary" id="champ-confetti-btn">🎉 MORE CONFETTI</button>
+          <button type="button" class="champ-btn-secondary" id="champ-view-bracket-btn">🏆 BACK TO TOURNAMENT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stage Advancement Toast Notification -->
+  <div id="stage-advance-toast" class="stage-advance-toast" hidden>
+    <div class="toast-icon">✨</div>
+    <div class="toast-content">
+      <div class="toast-title" id="toast-title">STAGE COMPLETED!</div>
+      <div class="toast-desc" id="toast-desc">4 Titans advance to the Semifinals!</div>
+    </div>
+    <button type="button" class="toast-close" id="toast-close" aria-label="Dismiss toast">✕</button>
+  </div>
+
+  <!-- Real Data Layer & Application Script -->
+  <script src="data/real-tournaments.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

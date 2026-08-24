@@ -1,0 +1,4 @@
+{
+  "notice": "Sanitized local cache for API-Football real data layer (10 competitions).",
+  "competitions": ["wc", "ucl", "pl", "laliga", "serieA", "bundesliga", "europaLeague", "euro", "copa", "libertadores"]
+}
